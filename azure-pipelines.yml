@@ -2,10 +2,14 @@ trigger:
 - main
 
 pool:
-  vmImage: 'ubuntu-latest'
+  name: 'MyUbuntuMachine' 
 
 steps:
 - script: |
-    echo "Starting the build process..."
-    docker compose build
-  displayName: 'Build Docker Images (CI Test)'
+    echo "Copying new code to the project folder..."
+    cp -r $(System.DefaultWorkingDirectory)/* ~/MyDevOpsProject/
+    
+    echo "Restarting the application with the new code..."
+    cd ~/MyDevOpsProject
+    docker compose up -d --build
+  displayName: 'Deploy to Local Server'
