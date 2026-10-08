@@ -1,0 +1,15 @@
+trigger:
+- main
+
+pool:
+  name: 'MyUbuntuMachine' 
+
+steps:
+- script: |
+    echo "Copying new code to the project folder..."
+    cp -r $(System.DefaultWorkingDirectory)/* ~/MyDevOpsProject/
+    
+    echo "Restarting the application with the new code..."
+    cd ~/MyDevOpsProject
+    docker compose up -d --build
+  displayName: 'Deploy to Local Server'
