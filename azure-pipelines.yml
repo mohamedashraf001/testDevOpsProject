@@ -1,0 +1,11 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- script: |
+    echo "Starting the build process..."
+    docker compose build
+  displayName: 'Build Docker Images (CI Test)'
